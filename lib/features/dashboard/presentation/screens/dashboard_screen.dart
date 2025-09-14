@@ -2,7 +2,13 @@
 
 import 'package:cardlink_ui_kit/core/constants/app_assets.dart';
 import 'package:cardlink_ui_kit/core/widgets/custom_card.dart';
+import 'package:cardlink_ui_kit/features/card_builder/data/models/populated_card_model.dart';
+import 'package:cardlink_ui_kit/features/card_builder/data/models/template_model.dart';
+import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/add_new_card_screen.dart';
+import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/card_preview_screen.dart';
+import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/explore_templates_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -13,6 +19,12 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.push(AddNewCardScreen.routeName);
+        },
+        child: const Icon(LucideIcons.plus),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -74,11 +86,29 @@ class DashboardScreen extends StatelessWidget {
   // --- Card Preview Widget ---
   Widget _buildCardPreview(BuildContext context) {
     final theme = Theme.of(context);
+    // --- MOCK DATA FOR NAVIGATION ---
+    final mockCard = PopulatedCard(
+      template: CardTemplate(
+        id: '2',
+        name: 'Corporate Blue',
+        isPremium: false,
+        primaryColor: theme.colorScheme.primary,
+        accentColor: theme.colorScheme.secondary,
+      ),
+      name: 'Jennifer Lee',
+      title: 'UI/UX Designer',
+      avatarUrl: AppAssets.avatar,
+      bio:
+          'Creating beautiful and intuitive digital experiences. Based in Gujranwala, Pakistan.',
+      links: [
+        UserLink(title: 'GitHub', icon: LucideIcons.github, url: '#'),
+        UserLink(title: 'Dribbble', icon: LucideIcons.dribbble, url: '#'),
+        UserLink(title: 'LinkedIn', icon: LucideIcons.linkedin, url: '#'),
+      ],
+    );
     return CustomCard(
       padding: EdgeInsets.zero,
-      onTap: () {
-        /* TODO: Navigate to Card Customizer */
-      },
+      onTap: () => context.push(CardPreviewScreen.routeName, extra: mockCard),
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -168,7 +198,9 @@ class DashboardScreen extends StatelessWidget {
         _ActionCard(
           icon: LucideIcons.paintbrush,
           label: 'Customize Card',
-          onTap: () {},
+          onTap: () {
+            context.push(ExploreTemplatesScreen.routeName);
+          },
         ),
         _ActionCard(icon: LucideIcons.qrCode, label: 'Share QR', onTap: () {}),
         _ActionCard(

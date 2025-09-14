@@ -5,6 +5,7 @@ import 'package:cardlink_ui_kit/core/widgets/buttons/primary_button.dart';
 import 'package:cardlink_ui_kit/core/widgets/custom_text_field.dart';
 import 'package:cardlink_ui_kit/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:cardlink_ui_kit/features/auth/presentation/screens/signup_screen.dart';
+import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/explore_templates_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -94,7 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 24),
 
               // --- Login Button ---
-              PrimaryButton(text: 'log in', onPressed: () {}),
+              PrimaryButton(
+                text: 'log in',
+                onPressed: () {
+                  context.push(ExploreTemplatesScreen.routeName);
+                },
+              ),
               const SizedBox(height: 32),
 
               // --- Social Login Divider ---
