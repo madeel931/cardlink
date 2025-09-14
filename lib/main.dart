@@ -1,23 +1,26 @@
+import 'package:cardlink_ui_kit/core/bloc/app_bloc_observer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'app.dart';
 
-/// The main entry point for the CardLink UI Kit.
-///
-/// This function initializes the Flutter application. In later phases, it will
-/// also handle service initializations like local database (Hive),
-/// state management (Bloc observer), and environment setup.
-void main() {
-  // Ensure that Flutter widgets are initialized before running the app.
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set preferred screen orientations. For a mobile-focused app,
-  // portrait mode is often preferred.
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
+  );
+
+  Bloc.observer = AppBlocObserver();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // Run the main application widget.
   runApp(const CardLinkApp());
 }

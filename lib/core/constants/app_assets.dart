@@ -7,11 +7,16 @@ class AppAssets {
   // Example paths (uncomment and modify as you add assets)
   // --- Lottie Animations ---
   // static const String loadingAnimation = 'assets/lottie/loading.json';
+  static const String onboarding1 = 'assets/lottie/onboarding_1.json';
+  static const String onboarding2 = 'assets/lottie/onboarding_2.json';
+  static const String onboarding3 = 'assets/lottie/onboarding_3.json';
 
   // --- Images ---
   // static const String logo = 'assets/images/logo.png';
   // static const String logoDark = 'assets/images/logo_dark.png';
+  static const String avatar = 'assets/images/avatar.png';
 
   // --- Icons ---
   // static const String googleIcon = 'assets/icons/google.svg';
+  static const String googleIcon = 'assets/icons/google.svg';
 }

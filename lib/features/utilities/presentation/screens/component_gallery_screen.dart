@@ -1,8 +1,10 @@
+import 'package:cardlink_ui_kit/core/theme/cubit/theme_cubit.dart';
 import 'package:cardlink_ui_kit/core/widgets/buttons/primary_button.dart';
 import 'package:cardlink_ui_kit/core/widgets/buttons/secondary_button.dart';
 import 'package:cardlink_ui_kit/core/widgets/custom_card.dart';
 import 'package:cardlink_ui_kit/core/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
 
 /// A screen for developers to preview and test all core reusable components.
@@ -29,6 +31,7 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentThemeMode = context.watch<ThemeCubit>().state;
     return Scaffold(
       appBar: AppBar(title: const Text('Component Gallery')),
       body: ListView(
@@ -113,6 +116,63 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
+            ),
+          ),
+
+          const SizedBox(height: 16),
+          CustomCard(
+            onTap: () {},
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Standard Card',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'This is a CustomCard widget. It has consistent styling and can be tapped.',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+          ),
+
+          const Divider(height: 48),
+
+          // --- NEW: Theme Switcher Section ---
+          Text(
+            'Theme Switcher',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 16),
+          SegmentedButton<ThemeMode>(
+            segments: const <ButtonSegment<ThemeMode>>[
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.light,
+                label: Text('Light'),
+                icon: Icon(LucideIcons.sun),
+              ),
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.dark,
+                label: Text('Dark'),
+                icon: Icon(LucideIcons.moon),
+              ),
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.system,
+                label: Text('System'),
+                icon: Icon(LucideIcons.laptop),
+              ),
+            ],
+            // The currently selected segment is based on the cubit's state.
+            selected: <ThemeMode>{currentThemeMode},
+            onSelectionChanged: (Set<ThemeMode> newSelection) {
+              // We call the cubit's method to change the theme.
+              context.read<ThemeCubit>().changeTheme(newSelection.first);
+            },
+            showSelectedIcon: false, // Cleaner look
+            style: SegmentedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12),
             ),
           ),
         ],
