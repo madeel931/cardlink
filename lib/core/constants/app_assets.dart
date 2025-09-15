@@ -15,6 +15,7 @@ class AppAssets {
   // static const String logo = 'assets/images/logo.png';
   // static const String logoDark = 'assets/images/logo_dark.png';
   static const String avatar = 'assets/images/avatar.png';
+  static const String logoIcon = 'assets/images/logo_icon.png';
 
   // --- Icons ---
   // static const String googleIcon = 'assets/icons/google.svg';

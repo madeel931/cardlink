@@ -7,6 +7,9 @@ import 'package:cardlink_ui_kit/features/card_builder/data/models/template_model
 import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/add_new_card_screen.dart';
 import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/card_preview_screen.dart';
 import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/explore_templates_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_analytics_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_templates_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/qr_generator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
@@ -193,7 +196,9 @@ class DashboardScreen extends StatelessWidget {
         _ActionCard(
           icon: LucideIcons.circlePlus,
           label: 'Add Link',
-          onTap: () {},
+          onTap: () {
+            context.push(LinkTemplatesScreen.routeName);
+          },
         ),
         _ActionCard(
           icon: LucideIcons.paintbrush,
@@ -202,7 +207,13 @@ class DashboardScreen extends StatelessWidget {
             context.push(ExploreTemplatesScreen.routeName);
           },
         ),
-        _ActionCard(icon: LucideIcons.qrCode, label: 'Share QR', onTap: () {}),
+        _ActionCard(
+          icon: LucideIcons.qrCode,
+          label: 'Share QR',
+          onTap: () {
+            context.push(QrGeneratorScreen.routeName);
+          },
+        ),
         _ActionCard(
           icon: LucideIcons.chartBar,
           label: 'Analytics',
@@ -335,8 +346,11 @@ class _LinkTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    // MOCK UserLink for navigation
+    final mockLink = UserLink(title: title, icon: icon, url: '#');
     return ListTile(
       contentPadding: EdgeInsets.zero,
+      onTap: () => context.push(LinkAnalyticsScreen.routeName, extra: mockLink),
       leading: CircleAvatar(
         backgroundColor: theme.colorScheme.surfaceContainerHighest,
         child: Icon(icon, size: 20),
@@ -345,11 +359,22 @@ class _LinkTile extends StatelessWidget {
         title,
         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
       ),
-      trailing: Text(
-        '$clicks clicks',
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: theme.colorScheme.onSurfaceVariant,
-        ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '$clicks clicks',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Icon(
+            LucideIcons.chevronRight,
+            size: 16,
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ],
       ),
     );
   }

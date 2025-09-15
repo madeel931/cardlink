@@ -3,6 +3,7 @@
 import 'package:cardlink_ui_kit/features/card_builder/data/models/populated_card_model.dart';
 import 'package:cardlink_ui_kit/features/card_builder/data/models/template_model.dart';
 import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/share_card_bottom_sheet.dart';
+import 'package:cardlink_ui_kit/features/card_builder/presentation/widgets/link_button.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
 
@@ -73,7 +74,12 @@ class CardPreviewScreen extends StatelessWidget {
                     itemCount: card.links.length,
                     itemBuilder: (context, index) {
                       final link = card.links[index];
-                      return _LinkButton(link: link, template: template);
+                      return LinkButton(
+                        icon: link.icon,
+                        title: link.title,
+                        backgroundColor: template.accentColor.withOpacity(0.15),
+                        foregroundColor: template.accentColor,
+                      );
                     },
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 16),

@@ -16,6 +16,11 @@ import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/card_
 import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/explore_templates_screen.dart';
 import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/template_preview_screen.dart';
 import 'package:cardlink_ui_kit/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/data/models/link_template_model.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/add_link_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_analytics_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_templates_screen.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/qr_generator_screen.dart';
 import 'package:cardlink_ui_kit/features/utilities/presentation/screens/component_gallery_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -113,6 +118,30 @@ class AppRouter {
           final card = state.extra as PopulatedCard;
           return CardPreviewScreen(card: card);
         },
+      ),
+      GoRoute(
+        path: LinkTemplatesScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const LinkTemplatesScreen(),
+      ),
+      GoRoute(
+        path: AddLinkScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          final template = state.extra as LinkTemplate;
+          return AddLinkScreen(template: template);
+        },
+      ),
+      GoRoute(
+        path: LinkAnalyticsScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          final link = state.extra as UserLink;
+          return LinkAnalyticsScreen(link: link);
+        },
+      ),
+      GoRoute(
+        path: QrGeneratorScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const QrGeneratorScreen(),
       ),
       GoRoute(
         path: ComponentGalleryScreen.routeName,

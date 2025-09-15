@@ -1,7 +1,9 @@
 // lib/features/card_builder/presentation/screens/card_customizer_screen.dart
 
 import 'package:cardlink_ui_kit/core/widgets/custom_text_field.dart';
+import 'package:cardlink_ui_kit/features/card_builder/data/models/populated_card_model.dart';
 import 'package:cardlink_ui_kit/features/card_builder/data/models/template_model.dart';
+import 'package:cardlink_ui_kit/features/link_builder/presentation/widgets/share_specific_link_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
 
@@ -21,11 +23,9 @@ class _CardCustomizerScreenState extends State<CardCustomizerScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize controllers with placeholder data
     _nameController = TextEditingController(text: 'Jennifer Lee');
     _titleController = TextEditingController(text: 'UI/UX Designer');
 
-    // Add listeners to update the UI on text change
     _nameController.addListener(() => setState(() {}));
     _titleController.addListener(() => setState(() {}));
   }
@@ -39,6 +39,20 @@ class _CardCustomizerScreenState extends State<CardCustomizerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // This mock data is used to populate the link fields below
+    final mockLinks = [
+      UserLink(
+        title: 'LinkedIn',
+        icon: LucideIcons.linkedin,
+        url: 'linkedin.com/in/username',
+      ),
+      UserLink(
+        title: 'GitHub',
+        icon: LucideIcons.github,
+        url: 'github.com/username',
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Customize Card'),
@@ -54,15 +68,12 @@ class _CardCustomizerScreenState extends State<CardCustomizerScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // --- Live Preview ---
             _LiveCardPreview(
               template: widget.template,
               name: _nameController.text,
               title: _titleController.text,
             ),
             const SizedBox(height: 32),
-
-            // --- Form Fields ---
             Text(
               'Profile Information',
               style: Theme.of(context).textTheme.titleMedium,
@@ -80,23 +91,15 @@ class _CardCustomizerScreenState extends State<CardCustomizerScreen> {
               prefixIcon: LucideIcons.briefcase,
             ),
             const SizedBox(height: 32),
-
             Text(
               'Social Links',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const Divider(height: 24),
-            // For the UI kit, we show a static example.
-            // A real app would have a dynamic list here.
-            _SocialLinkField(
-              icon: LucideIcons.linkedin,
-              hintText: 'linkedin.com/in/username',
-            ),
+            // We now pass the full mockLink object to our updated helper widget
+            _SocialLinkField(link: mockLinks[0]),
             const SizedBox(height: 16),
-            _SocialLinkField(
-              icon: LucideIcons.github,
-              hintText: 'github.com/username',
-            ),
+            _SocialLinkField(link: mockLinks[1]),
           ],
         ),
       ),
@@ -104,6 +107,7 @@ class _CardCustomizerScreenState extends State<CardCustomizerScreen> {
   }
 }
 
+// This helper widget is unchanged from Phase 17
 class _LiveCardPreview extends StatelessWidget {
   const _LiveCardPreview({
     required this.template,
@@ -118,7 +122,7 @@ class _LiveCardPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 16 / 9, // A horizontal card aspect ratio
+      aspectRatio: 16 / 9,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -176,19 +180,28 @@ class _LiveCardPreview extends StatelessWidget {
   }
 }
 
+// KEY CHANGE: This helper widget was updated in Phase 26
 class _SocialLinkField extends StatelessWidget {
-  const _SocialLinkField({required this.icon, required this.hintText});
-  final IconData icon;
-  final String hintText;
+  const _SocialLinkField({required this.link});
+  final UserLink link;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
-      prefixIcon: icon,
-      hintText: hintText,
+      // A key helps Flutter identify the widget correctly if the list were dynamic
+      key: ValueKey(link.title),
+      initialValue: link.url,
+      prefixIcon: link.icon,
       suffixIcon: IconButton(
-        icon: const Icon(LucideIcons.trash2, size: 20, color: Colors.red),
-        onPressed: () {},
+        icon: const Icon(LucideIcons.ellipsisVertical, size: 20),
+        onPressed: () {
+          // This is the new functionality to show the share sheet
+          showModalBottomSheet(
+            context: context,
+            builder: (ctx) => ShareSpecificLinkBottomSheet(link: link),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+          );
+        },
       ),
     );
   }

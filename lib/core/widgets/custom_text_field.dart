@@ -1,8 +1,11 @@
+// lib/core/widgets/custom_text_field.dart
+
 import 'package:flutter/material.dart';
 
 /// A customized text form field widget that aligns with the app's design system.
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
+  final String? initialValue;
   final String? hintText;
   final String? labelText;
   final IconData? prefixIcon;
@@ -15,6 +18,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     this.controller,
+    this.initialValue,
     this.hintText,
     this.labelText,
     this.prefixIcon,
@@ -23,7 +27,11 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.onChanged,
-  });
+    // This assertion prevents errors from using controller and initialValue at the same time.
+  }) : assert(
+         initialValue == null || controller == null,
+         'Cannot provide both an initialValue and a controller.',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +39,7 @@ class CustomTextField extends StatelessWidget {
 
     return TextFormField(
       controller: controller,
+      initialValue: initialValue, // <-- ADDED THIS LINE
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
@@ -45,7 +54,7 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
+            color: theme.colorScheme.onSurface.withOpacity(0.2),
           ),
         ),
         focusedBorder: OutlineInputBorder(
