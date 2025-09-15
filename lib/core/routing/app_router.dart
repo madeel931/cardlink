@@ -21,6 +21,13 @@ import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/add_l
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_analytics_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_templates_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/qr_generator_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/account_settings_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/app_info_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/change_password_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/edit_profile_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/profile_page.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/security_settings_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/theme_switcher_screen.dart';
 import 'package:cardlink_ui_kit/features/utilities/presentation/screens/component_gallery_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -143,6 +150,42 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) =>
             const QrGeneratorScreen(),
       ),
+      GoRoute(
+        path: ProfilePage.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ProfilePage(),
+      ),
+      GoRoute(
+        path: EditProfileScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: AccountSettingsScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const AccountSettingsScreen(),
+      ),
+      GoRoute(
+        path: SecuritySettingsScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const SecuritySettingsScreen(),
+      ),
+      GoRoute(
+        path: ChangePasswordScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ChangePasswordScreen(),
+      ),
+      GoRoute(
+        path: ThemeSwitcherScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ThemeSwitcherScreen(),
+      ),
+      GoRoute(
+        path: AppInfoScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const AppInfoScreen(),
+      ),
+      // .
       GoRoute(
         path: ComponentGalleryScreen.routeName,
         builder: (BuildContext context, GoRouterState state) {

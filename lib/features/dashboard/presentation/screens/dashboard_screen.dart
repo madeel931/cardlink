@@ -10,6 +10,7 @@ import 'package:cardlink_ui_kit/features/card_builder/presentation/screens/explo
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_analytics_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_templates_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/qr_generator_screen.dart';
+import 'package:cardlink_ui_kit/features/profile/presentation/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
@@ -80,7 +81,10 @@ class DashboardScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(right: 16.0, left: 8.0),
-          child: CircleAvatar(backgroundImage: AssetImage(AppAssets.avatar)),
+          child: GestureDetector(
+            onTap: () => context.push(ProfilePage.routeName),
+            child: CircleAvatar(backgroundImage: AssetImage(AppAssets.avatar)),
+          ),
         ),
       ],
     );

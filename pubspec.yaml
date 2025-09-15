@@ -22,6 +22,7 @@ dependencies:
   qr_flutter: ^4.1.0
   share_plus: ^12.0.0
   fl_chart: ^1.1.0
+  package_info_plus: ^9.0.0
   
   # Icons
 

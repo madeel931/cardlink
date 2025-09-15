@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
+  final int? maxLines;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.onChanged,
+    this.maxLines = 1,
     // This assertion prevents errors from using controller and initialValue at the same time.
   }) : assert(
          initialValue == null || controller == null,
@@ -39,15 +41,17 @@ class CustomTextField extends StatelessWidget {
 
     return TextFormField(
       controller: controller,
-      initialValue: initialValue, // <-- ADDED THIS LINE
+      initialValue: initialValue,
       obscureText: obscureText,
       keyboardType: keyboardType,
       validator: validator,
       onChanged: onChanged,
+      maxLines: maxLines,
       style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
+
         prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 20) : null,
         suffixIcon: suffixIcon,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
