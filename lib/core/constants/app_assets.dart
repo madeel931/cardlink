@@ -10,6 +10,7 @@ class AppAssets {
   static const String onboarding1 = 'assets/lottie/onboarding_1.json';
   static const String onboarding2 = 'assets/lottie/onboarding_2.json';
   static const String onboarding3 = 'assets/lottie/onboarding_3.json';
+  static const String success = 'assets/lottie/success.json';
 
   // --- Images ---
   // static const String logo = 'assets/images/logo.png';

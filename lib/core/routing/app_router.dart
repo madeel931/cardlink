@@ -21,6 +21,11 @@ import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/add_l
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_analytics_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_templates_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/qr_generator_screen.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/confirmation_screen.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/manage_subscription_screen.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/premium_benefits_screen.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/pricing_plans_screen.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/restore_purchases_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/account_settings_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/app_info_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/change_password_screen.dart';
@@ -184,6 +189,31 @@ class AppRouter {
         path: AppInfoScreen.routeName,
         builder: (BuildContext context, GoRouterState state) =>
             const AppInfoScreen(),
+      ),
+      GoRoute(
+        path: PricingPlansScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const PricingPlansScreen(),
+      ),
+      GoRoute(
+        path: PremiumBenefitsScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const PremiumBenefitsScreen(),
+      ),
+      GoRoute(
+        path: ConfirmationScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ConfirmationScreen(),
+      ),
+      GoRoute(
+        path: ManageSubscriptionScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ManageSubscriptionScreen(),
+      ),
+      GoRoute(
+        path: RestorePurchasesScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const RestorePurchasesScreen(),
       ),
       // .
       GoRoute(

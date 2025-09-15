@@ -1,6 +1,8 @@
 // lib/features/profile/presentation/screens/profile_page.dart
 
 import 'package:cardlink_ui_kit/core/constants/app_assets.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/manage_subscription_screen.dart';
+import 'package:cardlink_ui_kit/features/premium/presentation/screens/pricing_plans_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/account_settings_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/app_info_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/edit_profile_screen.dart';
@@ -23,6 +25,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             _buildProfileHeader(context, theme),
+            _buildPremiumBanner(context),
             const SizedBox(height: 16),
             _buildSection(
               context,
@@ -45,6 +48,12 @@ class ProfilePage extends StatelessWidget {
                   title: 'Security',
                   icon: LucideIcons.shield,
                   onTap: () => context.push(SecuritySettingsScreen.routeName),
+                ),
+                _buildListTile(
+                  context,
+                  title: 'My Subscription',
+                  icon: LucideIcons.gem,
+                  onTap: () => context.push(ManageSubscriptionScreen.routeName),
                 ),
               ],
             ),
@@ -174,6 +183,58 @@ class ProfilePage extends StatelessWidget {
       title: Text(title),
       trailing: const Icon(LucideIcons.chevronRight, size: 16),
       onTap: onTap,
+    );
+  }
+
+  Widget _buildPremiumBanner(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: GestureDetector(
+        onTap: () => context.push(PricingPlansScreen.routeName),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            gradient: LinearGradient(
+              colors: [theme.colorScheme.primary, theme.colorScheme.secondary],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                LucideIcons.gem,
+                color: Colors.white.withOpacity(0.8),
+                size: 32,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Go Premium',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Unlock all features',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(LucideIcons.chevronRight, color: Colors.white),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
