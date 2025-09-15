@@ -33,7 +33,14 @@ import 'package:cardlink_ui_kit/features/profile/presentation/screens/edit_profi
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/profile_page.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/security_settings_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/theme_switcher_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/app_walkthrough_screen.dart';
 import 'package:cardlink_ui_kit/features/utilities/presentation/screens/component_gallery_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/contact_support_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/empty_states_gallery_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/extra_states_gallery_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/faqs_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/help_center_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/qr_scanner_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +48,7 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: DashboardScreen.routeName,
+    initialLocation: ExtraStatesGalleryScreen.routeName,
     routes: <RouteBase>[
       GoRoute(
         path: SplashScreen.routeName,
@@ -214,6 +221,41 @@ class AppRouter {
         path: RestorePurchasesScreen.routeName,
         builder: (BuildContext context, GoRouterState state) =>
             const RestorePurchasesScreen(),
+      ),
+      GoRoute(
+        path: QrScannerScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const QrScannerScreen(),
+      ),
+      GoRoute(
+        path: HelpCenterScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const HelpCenterScreen(),
+      ),
+      GoRoute(
+        path: FaqsScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const FaqsScreen(),
+      ),
+      GoRoute(
+        path: ContactSupportScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ContactSupportScreen(),
+      ),
+      GoRoute(
+        path: AppWalkthroughScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const AppWalkthroughScreen(),
+      ),
+      GoRoute(
+        path: EmptyStatesGalleryScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const EmptyStatesGalleryScreen(),
+      ),
+      GoRoute(
+        path: ExtraStatesGalleryScreen.routeName,
+        builder: (BuildContext context, GoRouterState state) =>
+            const ExtraStatesGalleryScreen(),
       ),
       // .
       GoRoute(

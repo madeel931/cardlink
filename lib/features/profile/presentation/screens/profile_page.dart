@@ -8,6 +8,8 @@ import 'package:cardlink_ui_kit/features/profile/presentation/screens/app_info_s
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/security_settings_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/theme_switcher_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/contact_support_screen.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/help_center_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
@@ -77,13 +79,13 @@ class ProfilePage extends StatelessWidget {
                   context,
                   title: 'Help Center',
                   icon: LucideIcons.circleQuestionMark,
-                  onTap: () {},
+                  onTap: () => context.push(HelpCenterScreen.routeName),
                 ),
                 _buildListTile(
                   context,
                   title: 'Contact Support',
                   icon: LucideIcons.messageSquare,
-                  onTap: () {},
+                  onTap: () => context.push(ContactSupportScreen.routeName),
                 ),
                 _buildListTile(
                   context,

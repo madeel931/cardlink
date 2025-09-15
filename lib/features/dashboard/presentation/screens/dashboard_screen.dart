@@ -11,6 +11,7 @@ import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/link_templates_screen.dart';
 import 'package:cardlink_ui_kit/features/link_builder/presentation/screens/qr_generator_screen.dart';
 import 'package:cardlink_ui_kit/features/profile/presentation/screens/profile_page.dart';
+import 'package:cardlink_ui_kit/features/utilities/presentation/screens/qr_scanner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_flutter/lucide_flutter.dart';
@@ -73,6 +74,10 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       actions: [
+        IconButton(
+          onPressed: () => context.push(QrScannerScreen.routeName),
+          icon: const Icon(LucideIcons.scanLine),
+        ),
         IconButton(
           onPressed: () {
             /* TODO: Navigate to Notifications */
